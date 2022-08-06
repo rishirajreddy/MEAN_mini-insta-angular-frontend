@@ -1,0 +1,14 @@
+/* form {
+    text-align: center;
+} */
+
+.image-preview {
+    height: 5rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.image-preview img {
+    height: 100%;
+    border-radius: 50%;
+}

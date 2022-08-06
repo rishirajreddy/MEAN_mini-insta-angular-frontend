@@ -1,0 +1,43 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.profile-spacer {
+    
+  }
+.container {
+    width: 100%;
+}
+
+.active {
+    color: blue;
+}
+
+mat-toolbar {
+    padding: 0 10%;
+}
+
+.image-preview {
+    height: 5rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.image-preview img {
+    height: 100%;
+    /* border-radius: 50%; */
+}
+
+.profile-btn{
+    padding: 20px 10px;
+    background: none;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+  }
+  
+  .profile-btn .profile-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }

@@ -1,0 +1,67 @@
+<app-header></app-header>
+
+<div 
+    *ngIf="!profileAvailable && !isLoading"
+style="text-align: center;margin-top: 20px;">
+    <h4>You have not created a profile yet. Click on the below button to create one</h4>
+    <div class="edit-btn">
+        <button
+        (click)="openProfileDialog('add')"
+        class="edit"
+        mat-stroked-button
+        >
+            Add Profile
+            <mat-icon class="icon-display">edit</mat-icon>
+        </button>
+    </div>
+</div>
+<mat-spinner
+    style="margin: auto;"
+    diameter=60
+    strokeWidth=7
+    *ngIf="isLoading"
+></mat-spinner>
+<div 
+    *ngIf="profileAvailable && !isLoading"
+class="container">
+    <div class="edit-btn">
+    <button
+    (click)="openProfileDialog('edit')"
+    class="edit"
+    mat-stroked-button
+    >
+        Edit Profile
+        <mat-icon class="icon-display">edit</mat-icon>
+    </button>
+</div>
+
+<!-- <div class="mat-card"> -->
+<mat-card class="example-card">
+    <mat-card-title-group class="mat-card-title-group">
+        <mat-card-title>{{profile.name}}</mat-card-title>
+        <mat-card-subtitle>{{profile.username}}</mat-card-subtitle>
+        <mat-card-subtitle>Email: <b>{{profile.email}}</b></mat-card-subtitle>
+        <mat-card-subtitle>Bio: <b style="word-wrap:break-word;">{{profile.bio}}</b></mat-card-subtitle>
+        <mat-card-subtitle>Posts: <b>{{profile.posts}}</b></mat-card-subtitle>
+        <img 
+        (click)="openProfileDialog('edit')"
+        class="img-display" mat-card-lg-image [src]= "profile.dp">
+    </mat-card-title-group>
+    <mat-card-content>
+      <!-- {{longText}} -->
+    </mat-card-content>
+  </mat-card>
+<!-- </div> -->
+</div>
+<mat-divider></mat-divider>
+
+<div class="posts-list">
+    <div class="post-header">
+        <h3>
+            Posts
+        </h3>
+    </div>
+    <mat-icon class="post-icon">apps</mat-icon>
+</div>
+
+<app-post-list></app-post-list>

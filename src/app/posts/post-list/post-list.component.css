@@ -1,0 +1,29 @@
+mat-grid-tile {
+    background: white;
+    cursor: pointer;
+  }
+mat-grid-tile:hover {
+    background:rgba(0, 0, 0, 0.15);
+  }
+
+.posts {
+    padding: 10px 40px;
+}
+.tile-image {
+    width: 100%;
+    height: auto;
+}
+.tile-image:hover {
+    opacity: 0.75;
+}
+
+.pop-likes-comments {
+  display: flex;
+}
+.pop-likes {
+  display: flex;
+}
+.pop-comments{
+  display: flex;
+  margin-left: 2rem;
+}

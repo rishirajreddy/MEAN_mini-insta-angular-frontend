@@ -1,0 +1,68 @@
+<div class="container">
+<form
+    (ngSubmit)="onSubmit(myForm)"
+    [formGroup]="myForm"
+>
+    <h1>Infinity Geeks</h1>
+    <mat-form-field 
+    *ngIf="mode === 'signup'"
+    appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+            type="email"
+            formControlName="email"
+            matInput placeholder="Email">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error
+                *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].dirty || myForm.controls['email'].touched"
+            >Provide a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input 
+            formControlName="username"
+            matInput placeholder="Username">
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-error
+                *ngIf="myForm.controls['username'].invalid && myForm.controls['username'].dirty || myForm.controls['username'].touched"
+            >Minimum 5 characters are required</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+            formControlName="password"
+            type= "{{hidePassword ? 'text':'password'}}" 
+            matInput 
+            placeholder="Password">
+            <mat-icon
+            style="color: blue;" 
+            (click)="hidePassword = !hidePassword"
+            matSuffix>{{hidePassword ? 'visibility':'visibility_off'}}</mat-icon>
+            <mat-error
+                *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].dirty || myForm.controls['password'].touched"
+            >Must be 6-10 characters long</mat-error>
+    </mat-form-field>
+    <br>
+    <button
+    [disabled]="!myForm.valid || isLoading"
+    type="submit" 
+    class="signup-btn"
+    [class.spinner]="isLoading"
+    mat-raised-button 
+    color="primary">Let's Go
+</button>
+</form>
+
+<h4 
+    *ngIf="mode === 'signup'"
+class="mat-h4">Already a geek?<button 
+    (click)="changeMode()"
+    type="button"
+    class="login" mat-button color="primary">Login</button></h4>
+<h4 
+    *ngIf="mode === 'login'"
+class="mat-h4">Not a geek yet?<button
+    (click)="changeMode()"
+    type="button"
+    class="login" mat-button color="primary">Be a Geek</button></h4>
+</div>

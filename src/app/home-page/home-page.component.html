@@ -1,0 +1,91 @@
+<app-header></app-header>
+<div 
+  *ngIf="isLoading"
+  class="d-flex justify-content-center">
+  <div style="margin: 2rem ;width: 3rem; height: 3rem; border-width: 5px;" 
+        class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div 
+class="container">
+    <mat-card-title style="text-align: center;">Geek {{username}}'s home</mat-card-title>
+    
+    <mat-card 
+      *ngFor="let post of posts"
+    class="example-card">
+    <mat-card-header class="mat-card-header">
+      <div
+      [style.backgroundImage]="'url('+post.dp+')'"
+      mat-card-avatar class="example-header-image">
+    </div>
+    <mat-card-title>{{post.username}}</mat-card-title>
+    <mat-card-subtitle>{{post.title}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <img mat-card-image src= {{post.image}} alt={{post.title}}>
+    <mat-card-content
+    style="display: flex; justify-content:flex-start"
+    >
+      <p><b>{{post.username}}</b></p>
+      <p style="margin-left:1rem;">
+        {{post.caption}}
+      </p>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="icons">
+      
+      <!-- like post functionality -->
+      <div 
+        placement="top" [ngbPopover]= openPopOver  
+        triggers="mouseenter:mouseleave" popoverTitle=""
+      class="like-comps">
+      <button
+      [disabled]="!profile" 
+      (click)="onPostLiked(post._id)"
+      mat-icon-button>
+      <!-- item.likedBy.find(({username}) => username === user) -->
+            <i 
+            *ngIf="!checkLike(post)"
+            class="bi bi-heart"   
+            style="font-size: 1.5rem; "></i>
+            <i 
+            *ngIf="checkLike(post)"
+            class="bi bi-heart-fill"   
+            style="font-size: 1.5rem; color: red;"></i>
+            <!-- bi bi-heart-fill -->
+        </button>
+        <h5
+          (click)="openViewLikesModal(post)"
+          style="text-align: center; cursor: pointer;">
+          {{post.likedBy.length <= 0 ? 
+            'No likes': 
+            post.likedBy.length === 1 ? 'View 1 Like':'View '+post.likedBy.length+' Likes'}}</h5>
+    </div>
+
+    <!-- comment post functionality -->
+    <div
+    placement="top" [ngbPopover]= openPopOver  
+        triggers="mouseenter:mouseleave" popoverTitle=""
+    class="comment-comp">
+        <button 
+        [disabled]="!profile"
+        (click)="openAddCommentDialog(post)"
+        mat-icon-button>
+            <i class="bi bi-chat-square" 
+            style="font-size: 1.5rem;"></i>
+            <!-- chat-square-dots-fill -->
+        </button>
+        <h5 
+          (click)="openAddCommentDialog(post)"
+          style="cursor: pointer;">
+          {{post.comments === 0 ? 'No comments': 
+          post.comments === 1 ? 'View 1 Comment': 'View '+post.comments+' Comments'
+        }}
+        </h5>
+    </div>
+  </mat-card-actions>
+  <mat-card-subtitle class="time">{{formatDate(currentDate, post.createdAt)}}</mat-card-subtitle>
+  </mat-card>
+
+</div>

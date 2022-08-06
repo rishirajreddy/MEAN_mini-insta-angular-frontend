@@ -1,0 +1,54 @@
+<!-- for delete post action  -->
+<div 
+    *ngIf="data.mode === 'delete'"
+class="delete-modal">
+    <h1 mat-dialog-title>Delete Post</h1>
+    <div mat-dialog-actions>
+        <button 
+      type="button"
+      mat-button (click)="onNoClick()">No</button>
+      <button
+      (click)="onDeletePost()"
+      mat-stroked-button  
+      color="warn"
+      cdkFocusInitial>Yes</button>
+    </div>
+</div>
+
+<!-- foe editing post action  -->
+
+<div *ngIf="data.mode === 'edit'">
+    <h1 mat-dialog-title>Edit Post</h1>
+    <form
+        (ngSubmit)="onDoneEdit()"
+        [formGroup]="myForm"
+    >
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input 
+            formControlName="title"
+            matInput type="text">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Caption</mat-label>
+            <input 
+            formControlName="caption"
+            matInput type="text">
+        </mat-form-field>
+        <div mat-dialog-actions>
+            <button
+            type="button"
+            (click)="onNoClick()"
+            mat-button
+            color="warn"    
+            >Cancel</button>
+            <button
+            [class.spinner]="isLoading"
+            style="color: blue;"
+            type="submit"
+            mat-button
+            cdkFocusInitial
+            >Done</button>
+        </div>
+    </form>
+</div>

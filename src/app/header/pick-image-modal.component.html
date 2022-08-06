@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Create New Post</h1>
+
+<form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="myForm"
+>
+<div>
+    <button  mat-stroked-button type="button" (click)="pickFile.click()">Choose Image</button>
+    <input hidden type="file" #pickFile (change)="onImageSelected($event)">
+  </div>
+  <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && myForm.controls['image'].valid">
+    <img [src]="imagePreview">
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field >
+    <mat-label>Title</mat-label>
+    <input 
+    matInput
+    type="text"
+    formControlName="title"
+    placeholder="Post Title"
+    >
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Caption</mat-label>
+    <textarea 
+    matInput
+    type="text"
+    formControlName="caption"
+    placeholder="Post Caption"
+    >
+    </textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button 
+  type="button"
+  mat-button (click)="onNoClick()">Cancel</button>
+  <button
+  [class.spinner]="isLoading"
+  [disabled]="!myForm.valid"
+  type="submit" 
+  mat-stroked-button  
+  color="primary"
+  >Add</button>
+</div>
+</form>

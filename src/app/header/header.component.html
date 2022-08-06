@@ -1,0 +1,50 @@
+<div class="container">
+<mat-toolbar>
+    <span
+    style="cursor: pointer;"
+        routerLink="/home"
+        routerLinkActive="active"
+    >
+        Infinity Geeks
+    </span>
+    <span class="example-spacer"></span>
+
+    <div>
+      <button
+        [disabled]="!profile"
+        mat-button
+        (click)="openProfileDialog()"
+      >
+      Create Post
+      <mat-icon>add_box</mat-icon>
+    </button>
+    </div>
+
+    <span class="profile-spacer"></span>
+    <!-- profile-button -->
+    <div
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact:true}"
+    >
+    <button
+    class="profile-btn"
+    mat-button
+    [matMenuTriggerFor]="menu"
+    >
+        Profile
+        <img class="profile-icon" [src] = "imagePath" alt="">
+        <!-- <mat-icon>person</mat-icon> -->
+    </button>
+<mat-menu #menu="matMenu">
+  <button 
+    routerLink="/profile"
+    mat-menu-item>My Profile</button>
+  <button 
+  (click)="logout()"
+  mat-menu-item>Logout</button>
+</mat-menu>
+</div>
+</mat-toolbar>
+</div>
+<mat-divider></mat-divider>
+

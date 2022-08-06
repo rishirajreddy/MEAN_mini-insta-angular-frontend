@@ -1,0 +1,23 @@
+<div class="header">
+    <h1 mat-dialog-title>{{post.likedBy.length <= 0 ? 'No Likes yet':'Likes'}}</h1>
+    <button 
+    (click)="onClose()"
+    mat-icon-button>
+    <mat-icon>clear</mat-icon>
+</button>
+</div>
+<hr>
+<div 
+*ngFor="let likes of post.likedBy"
+class="likes-list"
+mat-dialog-content>
+    <div 
+    [style.backgroundImage]="'url('+likes.dp+')'"
+    mat-card-avatar
+    class="avatar-image"
+    ></div>
+    <div class="liked-user-details">
+        <p style="margin: 0px 0px 1px"><b>{{likes.username}}</b></p>
+        <p style="word-wrap:break-word">{{likes.name}}</p>
+    </div>
+</div>

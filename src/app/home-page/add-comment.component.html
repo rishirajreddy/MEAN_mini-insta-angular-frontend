@@ -1,0 +1,79 @@
+<div class="header">
+    <h3 mat-dialog-title class="header-text">Comments</h3>
+    <button 
+    (click)="onNoClick()"
+    mat-icon-button>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<hr>
+<div>
+<mat-grid-list
+cols="2" rowHeight="2:2" gutterSize="1"
+>
+  <mat-grid-tile>
+      <img 
+      class="tile-image"
+      src= {{post.image}}>
+  </mat-grid-tile>
+  
+  <mat-grid-tile>
+      <mat-card 
+      [style.overflow]="'auto'"
+      class="my-card">
+          <mat-card-title>{{post.username}}</mat-card-title>
+      <mat-card-subtitle>{{post.title}}</mat-card-subtitle>
+      <mat-card-content>{{post.caption}}</mat-card-content>
+      <mat-divider></mat-divider><br>
+      <mat-expansion-panel
+      [disabled]="post.comments <= 0"
+      >
+          <mat-expansion-panel-header>
+              <mat-panel-title *ngIf="post.comments === 0">
+                <i>No comments yet..Feel free to add some!!</i>
+            </mat-panel-title>
+              <mat-panel-title *ngIf="post.comments > 0">
+                Load Comments
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div
+            *ngFor="let comments of commentsArr"
+            >
+            <div class="comment-box">
+            <p><b>{{comments.name}}</b></p>
+            <p style="padding-left: 1rem;
+                      margin: 0px 0px 5px;
+                      word-wrap: break-word;">{{comments.comment}}</p><br>
+            <div class="spacer" style="flex: 1 1 auto;"></div>
+            <mat-icon 
+            style="scale: 0.8; color: red; cursor: pointer;">delete</mat-icon>    
+        </div>
+            <p style="font-size:smaller;color: #adadad;">{{formatDate(currentDate, comments.commentedAt)}} ago</p>
+        </div>
+    </mat-expansion-panel><br>
+      <form
+      placement="top" [ngbPopover]= openPopOver  
+      triggers="mouseenter:mouseleave" popoverTitle=""
+        #f = ngForm
+      class="comment-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Add Comment</mat-label>
+            <input
+            [disabled]="!profile"
+            name="comment"
+            ngModel
+            matInput  type="text">
+        </mat-form-field>
+        <div 
+          class="post-btn">
+            <button
+            [disabled]="!profile" 
+            mat-button
+            (click)="onPostComment(f)"
+            style="color: blue; font-weight: 700;">Post</button>
+        </div>
+      </form>
+  </mat-card>
+</mat-grid-tile>
+</mat-grid-list>
+

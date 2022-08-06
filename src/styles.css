@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* for close button on the edge of dialog box */
+.cdk-overlay-pane.my-dialog {
+    position: relative!important;
+  }
+  .close.mat-icon-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    line-height: 14px;
+    min-width: auto;
+}
+
+/* spinner */
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+   
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 3px solid white;
+    border-top-color: green;
+    animation: spinner .8s linear infinite;
+  }
+/* panel-classes for snack-bars */
+.auth-error {
+    background-color: red;
+    color: white;
+}
+
+.auth-success {
+    background-color: green;
+    color: white;
+}
+
+.auth-logout {
+    background-color: #804000;
+    color: white;
+}
+
+.profile-added {
+    background-color: #0000ff;
+    color: white;
+}
+.post-added {
+    background-color: #0000ff;
+    color: white;
+}

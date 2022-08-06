@@ -1,0 +1,86 @@
+  <button mat-icon-button class="close" (click)="onCloseDialog()">
+    <mat-icon>close</mat-icon>
+  </button><br>
+  <mat-grid-list
+  cols="2" rowHeight="2:2" gutterSize="1"
+  >
+    <mat-grid-tile>
+        <img 
+        class="tile-image"
+        src= {{post.image}}>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-card class="my-card">
+            <div class="edit-btn">
+                <div
+                class="avatar-image"
+                [style.backgroundImage]="'url('+post.dp+')'"
+                mat-card-avatar></div>
+                <mat-card-title
+                style="margin: 4px 0px 8px;"
+                >{{post.username}}</mat-card-title>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button
+                    (click)="openEditPostModal('edit', post)"
+                    mat-menu-item>Edit
+                    </button>
+                    <button 
+                    (click)="openEditPostModal('delete', post)"
+                    mat-menu-item>Delete</button>
+                  </mat-menu>
+            </div>
+        <mat-card-subtitle>{{post.title}}</mat-card-subtitle>
+        <mat-card-content>{{post.caption}}</mat-card-content>
+        <mat-divider></mat-divider><br>
+        <mat-expansion-panel
+            [disabled]="post.comments <= 0"
+        >
+            <mat-expansion-panel-header>
+              <mat-panel-title
+              *ngIf="post.comments === 0">
+              <i>No comments yet..</i>
+            </mat-panel-title>
+              <mat-panel-title *ngIf="post.comments > 0">
+                Load Comments
+            </mat-panel-title>
+                <!-- <mat-divider inset></mat-divider> -->
+            </mat-expansion-panel-header>
+            <div *ngFor="let comments of commentsArr">
+            <div class="comment-box">
+              <p><b>{{comments.name}}</b></p>
+            <p style="padding-left: 1rem;
+                      margin: 0px 0px 5px;
+                      word-wrap: break-word;">{{comments.comment}}</p><br>
+            <div class="spacer" style="flex: 1 1 auto;"></div>
+            <!-- <mat-icon 
+            style="scale: 0.8; color: red; cursor: pointer;">delete</mat-icon> -->
+            </div>
+          </div>
+        </mat-expansion-panel><br>
+            <h4
+            (click)="openLikesModal()"
+            >View {{post.likedBy.length}} likes</h4>
+    </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+ <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
