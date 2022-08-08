@@ -16,6 +16,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Backend Code
 
 You can find the backend code here: <a href="https://github.com/rishirajreddy/MEAN_mini-insta-backend">Backend Code</a> <br>
-Clone the backend and run it on localhost:<ur fav port> <br><br>
+Clone the backend and run it on localhost:ur fav port <br>
 Change the MongoDB url to start saving your data. <br>
 
