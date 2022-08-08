@@ -42,7 +42,7 @@ class="container">
         <mat-card-subtitle>{{profile.username}}</mat-card-subtitle>
         <mat-card-subtitle>Email: <b>{{profile.email}}</b></mat-card-subtitle>
         <mat-card-subtitle>Bio: <b style="word-wrap:break-word;">{{profile.bio}}</b></mat-card-subtitle>
-        <mat-card-subtitle>Posts: <b>{{profile.posts}}</b></mat-card-subtitle>
+        <mat-card-subtitle>Posts: <b>{{posts.length}}</b></mat-card-subtitle>
         <img 
         (click)="openProfileDialog('edit')"
         class="img-display" mat-card-lg-image [src]= "profile.dp">
@@ -65,3 +65,4 @@ class="container">
 </div>
 
 <app-post-list></app-post-list>
+<app-footer *ngIf="!isLoading"></app-footer>

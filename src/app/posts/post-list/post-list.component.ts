@@ -39,6 +39,7 @@ export class PostListComponent implements OnInit {
     })
   }
 
+
   openPostDetailsDialog(id:string): void {
     this.posts.filter((post) => {
       if(post._id === id){

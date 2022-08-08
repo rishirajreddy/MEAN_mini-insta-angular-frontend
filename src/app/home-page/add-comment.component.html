@@ -67,6 +67,7 @@ cols="2" rowHeight="2:2" gutterSize="1"
         <div 
           class="post-btn">
             <button
+            [class.spinner] = "isLoading"
             [disabled]="!profile" 
             mat-button
             (click)="onPostComment(f)"

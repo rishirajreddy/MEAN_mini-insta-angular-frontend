@@ -15,6 +15,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   profileAvailable = false;
   isLoading = false;
+  otherProfileListener = false;
   profileAddNotifier:Subscription = this.profileService.addProfileListener.subscribe({
     next: (notified) => {
       this.getUserPosts();
@@ -32,6 +33,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   }
 
   posts = [];
+  otherProfileId!:string;
 
   constructor(private profileService:ProfileService,
               private route:ActivatedRoute, 
@@ -42,23 +44,33 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUserPosts();
     this.loadProfile();
-    }
+  }
 
   getUserPosts(){
     return this.postService.getMyPosts()
     .subscribe({
       next: (v:any) => {
         this.posts = v;
-        // console.log(this.posts);
+        console.log(this.posts);
       }
     }) 
+  }
+
+  getOtherProfile(){
+    this.otherProfileListener = true;
+    return this.profileService.getOthersProfile(this.otherProfileId)
+      .subscribe({
+        next: (v:any) => {
+          // this.otherProfile = v;
+          console.log(v)
+        }
+      })
   }
 
   loadProfile(){
     this.isLoading = true;
     return this.profileService.getProfile().subscribe({
       next: (v:any) => {
-        // console.log(v.data.profile);
         if(v.data.profile === undefined){
           this.profileAvailable = false;
         }else {

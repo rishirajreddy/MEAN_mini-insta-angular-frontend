@@ -39,6 +39,7 @@
   type="button"
   mat-button (click)="onNoClick()">Cancel</button>
   <button
+  [class.spinner]="isLoading"
   type="submit" 
   mat-button  
   cdkFocusInitial>Add</button>

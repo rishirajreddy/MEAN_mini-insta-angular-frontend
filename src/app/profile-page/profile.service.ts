@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-import { environment } from "src/environments/environment";
+import { BehaviorSubject, forkJoin, shareReplay, Subject } from "rxjs";
+import { environment } from "src/environments/environment.prod";
 import { Profile } from "./profile.model";
 
 @Injectable({
@@ -11,6 +11,12 @@ export class ProfileService{
 
     url = environment.url;
     addProfileListener = new Subject<null>();
+    getProfilePage = new Subject();
+    myEditedProfile = new BehaviorSubject(new FormData());
+
+    myProfile$ = forkJoin(this.getProfile()).pipe(
+        shareReplay(1)
+    )
 
     constructor(private http:HttpClient){
     }
@@ -36,6 +42,11 @@ export class ProfileService{
         profileData.append('name', name);
         profileData.append('bio', bio);
         profileData.append('image', image);
+        this.myEditedProfile.next(profileData);
         return this.http.put(`${this.url}/profile`, profileData);
+    }
+
+    getOthersProfile(username:string){
+        return this.http.get(`${this.url}/profile/profileId/${username}`);
     }
 }

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { LikeDetailsComponent } from '../posts/post-details/post-details.component';
 import { ProfileService } from '../profile-page/profile.service';
 import { Profile } from '../profile-page/profile.model';
+import { formatInTimeZone } from 'date-fns-tz';
 
 @Component({
   selector: 'app-home-page',
@@ -19,15 +20,17 @@ export class HomePageComponent implements OnInit {
 
   username!: string;
   posts:PostModel[] = [];
-  currentDate!:Date;
+  currentDate!:string;
   isLoading = false;
   profile!:Profile;
   openPopOver!:string;
   imagePath!:File | string;
+  isLiked = false;
 
   constructor(private postService:PostService,
     private profService:ProfileService, 
       private dialog:MatDialog,
+      private route:Router
       ) { }
   postAddNotifier:Subscription = this.postService.postListener
       .subscribe({
@@ -37,14 +40,14 @@ export class HomePageComponent implements OnInit {
       })
 
   ngOnInit(){
-    this.username = localStorage.getItem("username")!;
-    this.currentDate = new Date();
+    this.username = sessionStorage.getItem("username")!;
+    this.currentDate = formatInTimeZone(new Date(),'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
     this.loadPosts();
     this.loadProfile();
   }
 
-    formatDate(start:Date, end:string) {
-      return formatDistance(start, parseISO(end))+" ago";
+    formatDate(start:string, end:string) {
+      return formatDistance(parseISO(start), parseISO(end))+" ago";
   }
 
   loadPosts(){
@@ -101,6 +104,10 @@ openAddCommentDialog(post:PostModel){
     // this.animal = result;
   });
 }
+openProfilePage(id:string){
+  // this.profService.getProfilePage.next(id);
+  this.route.navigate(['/other-profile', id]);
+}
 
 
 openViewLikesModal(post:PostModel){
@@ -138,6 +145,7 @@ export class AddCommentDialogComponent implements OnInit{
     currentDate!:Date;
     profile!:Profile;
     openPopOver!:string;
+    isLoading = false;
 
     ngOnInit() {
       this.loadProfile();
@@ -156,11 +164,13 @@ export class AddCommentDialogComponent implements OnInit{
   }
 
     onPostComment(form:NgForm){
+      this.isLoading = true;
       this.postService.commentPost(this.post._id, form.value)
         .subscribe({
           next: (response) => {
-            this.route.navigate(['/home']);
+            this.isLoading = false;
             this.postService.getAddPostListener();
+            this.route.navigate(['/home']);
             console.log(response);
             this.onNoClick();
           }

@@ -16,7 +16,7 @@ export class AddProfileComponent implements OnInit {
 
    myForm!:FormGroup;
    imagePreview!: string;
-
+  isLoading = false;
    profile = {
     name:String,
     bio:String,
@@ -79,7 +79,9 @@ export class AddProfileComponent implements OnInit {
     reader.readAsDataURL(file as Blob);
   }
 
+
   onSaveProfile(){
+    this.isLoading = true;
     if(this.mode === 'add'){
       this.profileService.addProfile(
         this.myForm.value.name,
@@ -88,8 +90,9 @@ export class AddProfileComponent implements OnInit {
         )
         .subscribe({
           next: (response) => {
-            console.log(response);
+            // console.log(response);
             this.profService.getProfileAddListener();
+            this.isLoading = false;
             this.headerService.getListenToHeader();
             this._snackBar.open("Profile Created","", {
               duration: 2*1000,
@@ -108,6 +111,8 @@ export class AddProfileComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.profService.getProfileAddListener();
+          this.isLoading = false;
+          this.headerService.getListenToHeader();
         }
       })
     }
@@ -116,6 +121,8 @@ export class AddProfileComponent implements OnInit {
     this.onNoClick();
     this.route.navigate(['/profile']);
   }
+
+
   onNoClick(){
     this.dialogRef.close();
   }

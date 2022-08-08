@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<!-- <mat-spinner
+    style="margin: auto;"
+    diameter=60
+    strokeWidth=7
+    *ngIf="isLoading"
+></mat-spinner> -->
+<div 
+class="container">
+<mat-card class="example-card">
+    <mat-card-title-group class="mat-card-title-group {{isLoading ? 'spinner' : ''}}">
+        <mat-card-title>{{profile.name}}</mat-card-title>
+        <mat-card-subtitle>{{profile.username}}</mat-card-subtitle>
+        <mat-card-subtitle>Email: <b>{{profile.email}}</b></mat-card-subtitle>
+        <mat-card-subtitle>Bio: <b style="word-wrap:break-word;">{{profile.bio}}</b></mat-card-subtitle>
+        <mat-card-subtitle>Posts: <b>{{profile.posts}}</b></mat-card-subtitle>
+        <img 
+        class="img-display" mat-card-lg-image [src] = profile.dp >
+    </mat-card-title-group>
+    <mat-card-content>
+      <!-- {{longText}} -->
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-divider></mat-divider>
+
+<div class="posts-list">
+    <div class="post-header">
+        <h3>
+            Posts
+        </h3>
+    </div>
+    <mat-icon class="post-icon">apps</mat-icon>
+</div>
+
+<h3 
+    *ngIf="posts.length === 0 && !isLoading"
+style="text-align: center;">No posts available for this user yet!!</h3>
+
+<mat-spinner
+    style="margin: auto;"
+    diameter= 60
+    strokeWidth= 8
+    *ngIf="isLoading"
+>
+</mat-spinner>
+
+<div 
+    *ngIf="posts.length > 0 && !isLoading"
+    class="posts">
+    <mat-grid-list 
+        cols="3" rowHeight="2:2" gutterSize="15">
+        <mat-grid-tile
+        placement="top" [ngbPopover]= popContent  
+        triggers="mouseenter:mouseleave" popoverTitle=""
+            *ngFor="let post of posts"
+            (click)="openPostDetailsDialog(post._id)"
+            >
+            <img
+            class="tile-image"  
+            src= {{post.image}} 
+            >
+            
+            <ng-template #popContent>
+                <div class="pop-likes-comments">
+                    <div class="pop-likes">
+                        <mat-icon style="color: red;">favorite</mat-icon>
+                        <b>{{post.likedBy.length}}</b>
+                    </div>
+                    <div class="pop-comments">
+                        <mat-icon style="color: blue;">comment</mat-icon>
+                        <b>{{post.comments}}</b>
+                    </div>
+                </div>
+            </ng-template>
+
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+<app-footer></app-footer>

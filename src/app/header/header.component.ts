@@ -118,14 +118,14 @@ export class PickPostModalComponent implements OnInit{
       .subscribe({
         next: (response) => { 
           console.log(response);
-          this.postService.getAddPostListener();
-          this.route.navigate(['/home']);
-          this.isLoading = false;
           this._snacBar.open("Post Added", "", {
             duration: 2*1000,
             verticalPosition: "top",
             panelClass: "post-added"
           })
+          this.postService.getAddPostListener();
+          this.isLoading = false;
+          this.route.navigate(['/home']);
         }
       })
       this.onNoClick();

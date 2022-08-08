@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subject } from "rxjs";
-import { environment } from "src/environments/environment";
+import { environment } from "src/environments/environment.prod";
 import { User } from "./user.mode";
 
 @Injectable({
@@ -17,11 +17,11 @@ export class AuthService{
     constructor(private http:HttpClient, private _snackBar:MatSnackBar){}
 
     tokenAvailable(){
-        return !!localStorage.getItem("token");
+        return !!sessionStorage.getItem("token");
     }
 
     getToken(){
-        this.token = localStorage.getItem('token')!;
+        this.token = sessionStorage.getItem('token')!;
         return this.token;
     }
 
@@ -43,8 +43,8 @@ export class AuthService{
     }
 
     saveAuthToken(token:string, username:string){
-        localStorage.setItem('token', token);
-        localStorage.setItem('username', username);
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('username', username);
     }
 
     autoLogOutUser(){
@@ -52,6 +52,7 @@ export class AuthService{
     }
 
     private clearAuthData(){
+        sessionStorage.clear();
         localStorage.clear();
     }
 }

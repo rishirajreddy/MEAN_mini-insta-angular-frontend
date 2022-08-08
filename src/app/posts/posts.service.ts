@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { isThisHour } from "date-fns";
 import { Subject } from "rxjs";
-import { environment } from "src/environments/environment";
+import { environment } from "src/environments/environment.prod";
 import { PostModel } from "./post.mode";
 
 @Injectable({
@@ -25,6 +25,10 @@ export class PostService{
     //for getting a particular post of the user
     getPost(id:string){
         return this.http.get(`${this.url}/profile/posts/${id}`);
+    }
+
+    getOthersPost(id:string){
+        return this.http.get(`${this.url}/profile/post/${id}`);
     }
 
     getAllPosts(){
@@ -58,5 +62,9 @@ export class PostService{
 
     getComments(postId:string){
         return this.http.get(`${this.url}/comments/${postId}`);
+    }
+
+    getOthersPosts(username:string){
+        return this.http.get(`${this.url}/profile/others/posts/${username}`);
     }
 }
