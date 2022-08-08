@@ -1,6 +1,8 @@
 # InfinityGramAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7. <br>
+This project is deployed to AWS Elastic BeanStalk. <br>
+Here is the link to the deployed version: <a href="http://meannodeinfinitygrambackend-env.eba-snrz4ntw.us-west-2.elasticbeanstalk.com">http://meannodeinfinitygrambackend-env.eba-snrz4ntw.us-west-2.elasticbeanstalk.com/home</a>
 
 ## Development server
 
