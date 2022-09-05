@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  url: "https://ancient-eyrie-80987.herokuapp.com/api/user"
-  // url: "http://localhost:3000/api/user"
+  // url: "https://ancient-eyrie-80987.herokuapp.com/api/user"
+  url: "http://localhost:3000/api/user"
 };
 
 /*

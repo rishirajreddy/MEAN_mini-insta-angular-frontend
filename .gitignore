@@ -38,6 +38,8 @@ testem.log
 /typings
 nodemon.json
 /backend
+/images
+nodemon.json
 
 # System files
 .DS_Store
