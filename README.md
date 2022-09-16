@@ -8,7 +8,8 @@ Here is the link to the deployed version: <br>
 You can use username: <b>msdhoni</b> && password: <b>1234567</b> for logging in 
 
 # Here is the Demo :
-<img height=300 width=550 src="https://user-images.githubusercontent.com/64702890/183501095-a5955867-0b5c-4281-a189-2664d4ce7cfa.gif">
+https://user-images.githubusercontent.com/64702890/190569070-ab069068-ddee-483e-86d6-d60715b523d9.mp4
+
 # Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
